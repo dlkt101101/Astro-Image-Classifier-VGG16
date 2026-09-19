@@ -1,6 +1,6 @@
 # Astrophysical Body Image Classifier: Benchmarking CNN Architectures on Deep-Sky Imagery
 
-![Classification examples](docs/images/astro_grid.png)
+![Classification examples](docs/Astronomical Grid VGG16.png)
 *Sample predictions across 12 astrophysical classes — galaxies, nebulae, star clusters*
 
 ## The Problem
