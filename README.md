@@ -1,19 +1,46 @@
-# Astrophysical Body Image Classifier with Fine-Tuned CNN Models
+# Astrophysical Body Image Classifier: Benchmarking CNN Architectures on Deep-Sky Imagery
 
-Group members include:
-* Darren Alexander Lam Kin Teng
-* Ojus Udagani
-* Raghuv Bansal
+![Classification examples](docs/images/astro_grid.png)
+*Sample predictions across 12 astrophysical classes — galaxies, nebulae, star clusters*
 
-The goal of this project was to implement 3 CNN models to predict 12 astrophysical classes based on image data, where each group member was responsible for a model implementation. The models implemented include VGG16, ResNet50 and a custom-built CNN.
+## The Problem
+Astronomical surveys generate millions of images faster than they can be
+manually labeled. Our team (3 members) tackled a 12-class astrophysical
+object classification problem, each of us independently building and
+tuning a different CNN architecture to compare approaches on the same
+dataset — a mini bake-off to find what actually works for this domain.
 
-This GitHub repository contains each member's Python Notebook named in the following format `ModelName_Member`. 
+**My role:** Implemented and fine-tuned VGG16, including transfer-learning
+setup, augmentation strategy, and hyperparameter tuning (`VGG16_Darren.ipynb`).
 
-Due to the data folder being too large, the dataset `astro_dataset_maxia` was not uploaded to the repo and can be downloaded from Kaggle (Link below).
+## Results
 
-In each notebook, the `astro_dataset_maxia` folder was downloaded from Kaggle and uploaded to our personal Google Drive. The Google Drive folder was then used as the data source for the project. 
+| Model | Owner | Test Accuracy | F1 (macro) |
+|---|---|---|---|
+| VGG16 (fine-tuned) | Darren | [X]% | [X] |
+| ResNet50 | Raghuv | [X]% | [X] |
+| Custom CNN | Ojus | [X]% | [X] |
 
-The final project report is also uploaded for a full documentation of the model building process, a discussion on the results and improvements to the project.
+![Confusion matrix](docs/images/confusion_matrix.png)
+*Confusion matrix, VGG16 — most confusion occurs between [class A] and [class B],
+likely due to [visual similarity reason]*
 
-Link to Kaggle dataset:
-https://www.kaggle.com/datasets/engeddy/astrophysical-objects-image-dataset/data
+![Grad-CAM saliency](docs/images/gradcam_examples.png)
+*Grad-CAM overlays showing the model attends to [nucleus/spiral arms/etc.]
+when classifying [class]*
+
+## Dataset
+12-class astrophysical object dataset ([Kaggle link](https://www.kaggle.com/datasets/engeddy/astrophysical-objects-image-dataset/data)).
+Not included in this repo due to size — see notebooks for download instructions.
+
+## Full Writeup
+See [Project Report.pdf](./Project%20Report.pdf) for the complete methodology,
+per-model comparison, and error analysis.
+
+## Repo Structure
+```
+├── VGG16_Darren.ipynb        # my model implementation
+├── ResNet50_Raghuv.ipynb
+├── CustomCNN_Ojus.ipynb
+└── Project Report.pdf
+```
