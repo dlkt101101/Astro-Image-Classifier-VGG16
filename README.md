@@ -1,47 +1,46 @@
-# Astrophysical Body Image Classifier: Benchmarking CNN Architectures on Deep-Sky Imagery
+# Astrophysical Body Image Classifier using Convolutional Neural Networks (VGG16)
 
-![Classification examples](docs/Astronomical_Grid_VGG16.png)
+![Sample predictions](docs/Astronomical_Grid_VGG16.png)
 
-*Sample predictions across 12 astrophysical classes — galaxies, nebulae, star clusters*
+*Sample predictions across 12 astrophysical object classes*
 
 ## The Problem
-Astronomical surveys generate millions of images faster than they can be
-manually labeled. Our team (3 members) tackled a 12-class astrophysical
-object classification problem, each of us independently building and
-tuning a different CNN architecture to compare approaches on the same
-dataset — a mini bake-off to find what actually works for this domain.
+Astronomical surveys generate images faster than they can be manually
+labeled. This project fine-tunes VGG16 via transfer learning to classify
+12 astrophysical object classes (galaxies, nebulae, star clusters, etc.)
+from image data.
 
-**My role:** Implemented and fine-tuned VGG16, including transfer-learning
-setup, augmentation strategy, and hyperparameter tuning (`VGG16_Darren.ipynb`).
+*Note: this model was built as part of a 3-person team project where each
+member independently designed and implemented a full pipeline (VGG16,
+ResNet50, and a custom CNN respectively) on a shared dataset, to compare
+architectures under the same problem. This repo contains my end-to-end
+VGG16 implementation — data pipeline, augmentation, training, and
+evaluation — built independently.*
 
 ## Results
+| Metric | VGG16 |
+|---|---|
+| Validation Accuracy | 97.26% |
+| Test Accuracy | 94.78% |
 
-| Model | Owner | Test Accuracy | F1 (macro) |
-|---|---|---|---|
-| VGG16 (fine-tuned) | Darren | [X]% | [X] |
-| ResNet50 | Raghuv | [X]% | [X] |
-| Custom CNN | Ojus | [X]% | [X] |
+*For context, across the team's three architectures on the same dataset/
+split, ResNet50 led (96.22% test), VGG16 was second (94.78%), and the
+custom CNN followed (93.04%) — full comparison in [Project Report.pdf].*
 
-![Confusion matrix](docs/images/confusion_matrix.png)
-*Confusion matrix, VGG16 — most confusion occurs between [class A] and [class B],
-likely due to [visual similarity reason]*
-
-![Grad-CAM saliency](docs/images/gradcam_examples.png)
-*Grad-CAM overlays showing the model attends to [nucleus/spiral arms/etc.]
-when classifying [class]*
+## Approach
+- Transfer learning on ImageNet-pretrained VGG16, base layers frozen
+- Data augmentation (rotation, shear, zoom, flip) to offset limited
+  training data (2,416 images across 12 classes)
+- Grid search over learning rate {0.0001, 0.001, 0.01} and weight decay
+  {0, 0.0001, 0.001} — found lr=0.001 optimal; higher lr overshot convergence
+- Dropout (p=0.5) + new dense layers on top of frozen VGG16 base
 
 ## Dataset
-12-class astrophysical object dataset ([Kaggle link](https://www.kaggle.com/datasets/engeddy/astrophysical-objects-image-dataset/data)).
-Not included in this repo due to size — see notebooks for download instructions.
+1.5GB, 12 classes (Asteroid, Black Hole, Earth, Galaxy, Jupiter, Mars,
+Mercury, Neptune, Pluto, Saturn, Uranus, Venus), pre-split into
+2,416 train / 658 val / 345 test images.
+[Kaggle source](link)
 
 ## Full Writeup
-See [Project Report.pdf](./Project%20Report.pdf) for the complete methodology,
-per-model comparison, and error analysis.
-
-## Repo Structure
-```
-├── VGG16_Darren.ipynb        # my model implementation
-├── ResNet50_Raghuv.ipynb
-├── CustomCNN_Ojus.ipynb
-└── Project Report.pdf
-```
+See [Project Report.pdf] for the complete methodology and results
+across all three architectures compared by the team.
