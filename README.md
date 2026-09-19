@@ -39,7 +39,7 @@ custom CNN followed (93.04%) — full comparison in [Project Report.pdf].*
 1.5GB, 12 classes (Asteroid, Black Hole, Earth, Galaxy, Jupiter, Mars,
 Mercury, Neptune, Pluto, Saturn, Uranus, Venus), pre-split into
 2,416 train / 658 val / 345 test images.
-[Kaggle source](link)
+[Kaggle source](https://www.kaggle.com/code/a3amat02/astrophysical-objects-classification-using-resnet#ResNet-fine-tuning-process-and-training-logs)
 
 ## Full Writeup
 See [Project Report.pdf] for the complete methodology and results
